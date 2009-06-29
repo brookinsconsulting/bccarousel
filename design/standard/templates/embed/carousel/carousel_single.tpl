@@ -120,7 +120,7 @@ h2.carousel_header_single {
 
 .jcarousel-skin-single .jcarousel-clip-horizontal {
     width:  142px;
-    height: 300px;
+    // height: 300px;
 }
 
 .jcarousel-skin-single .jcarousel-clip-vertical {
