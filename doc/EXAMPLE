@@ -1,0 +1,13 @@
+EXAMPLE
+=======
+
+1. Example Carousel (Single/List) eZXML Content Object Embeds
+
+These can be used in any xml blocks or xml textline datatypes.
+
+<embed size="medium" view="embed" class="carousel" custom:offset="0" custom:limit="5" href="ezobject://159" />
+
+<embed size="medium" view="embed" class="carousel_single" custom:offset="0" custom:limit="5" href="ezobject://159" />
+
+<embed size="medium" view="embed" class="carousel_list" custom:offset="0" custom:limit="5" href="ezobject://170" />
+
