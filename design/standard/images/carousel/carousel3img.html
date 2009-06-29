@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+#carouselContainer {
+	margin:0px;
+	padding:0px;
+	width: 540px !important;
+	max-width: 540px;
+	overflow: hidden;
+}
+#carouselInner {
+	margin:0px;
+	padding:0px;
+	visibility: hidden;
+	width: 100%;
+	height: 100%; 
+}
+.bc_carousel {
+	/* ie hack for inline blocks*/
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+	margin:0px;
+	padding:0px;
+	text-align: center;
+	width: 180px !important;
+	max-width: 180px;
+	vertical-align: top;
+}
+.bc_carousel img {
+	display: block;
+	margin: 0px auto;
+}
+h2.carousel_header {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	color: #602020;
+}
+.carousel_title {
+	font-weight: bold;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 11px;
+	padding: 2px 8px;
+}
+#prevBtn, #nextBtn {
+	cursor: pointer;
+	margin-top: 50px;
+	z-index: 1000;
+	position: absolute;
+}
+#nextBtn {
+	margin-left: 514px;
+}
+</style>
+<script type="text/javascript" src="dlite.min.js"></script>
+<script type="text/javascript" src="carousel.js"></script>
+<script language="Javascript" type="text/javascript">
+
+// helper function, modify to handle disabling prev/next buttons
+
+function preloadArrowImages() {
+	var img= new Image(); 
+    img.src="nextbtn-over.png"; 
+	img = new Image(); 
+    img.src="nextbtn-disabled.png"; 
+	img = new Image(); 
+    img.src="prevbtn-over.png"; 
+	img = new Image(); 
+    img.src="prevbtn-disabled.png"; 
+}
+preloadArrowImages();
+function disablePrevOrNext() {
+	if (Carousel.current_focus == 1) {
+		elm("prevBtn").disabled=true;
+		elm("prevBtn").style.cursor="default";
+		elm("prevBtn").src= 'prevbtn-disabled.png';
+	} else if (Carousel.current_focus == Carousel.item_count) {
+		elm("nextBtn").disabled=true;
+		elm("nextBtn").style.cursor="default";
+		elm("nextBtn").src= 'nextbtn-disabled.png';
+	} else {
+		if (elm("prevBtn").disabled) { elm("prevBtn").src='prevbtn.png'; elm("prevBtn").disabled = false; 
+		elm("prevBtn").style.cursor="pointer";}
+		if (elm("nextBtn").disabled) { elm("nextBtn").src='nextbtn.png'; elm("nextBtn").disabled = false; 
+		elm("nextBtn").style.cursor="pointer";}
+	}
+}
+
+DOMReady(function() {
+	Carousel.init(5, 3, true, 3000, disablePrevOrNext, 20, 50);
+	addEvent(elm("prevBtn"), "click", function() { Carousel.auto_play = false; Carousel.showPrevious(); });
+	addEvent(elm("nextBtn"), "click", function() { Carousel.auto_play = false; Carousel.showNext(); });
+	addEvent(elm("prevBtn"), "mouseover", function() { if (!this.disabled) this.src='prevbtn-over.png'; });
+	addEvent(elm("prevBtn"), "mouseout", function() { if (!this.disabled) this.src='prevbtn.png'; });
+	addEvent(elm("nextBtn"), "mouseover", function() { if (!this.disabled) this.src='nextbtn-over.png'; });
+	addEvent(elm("nextBtn"), "mouseout", function() { if (!this.disabled) this.src='nextbtn.png'; });
+});
+</script>
+<title>Carousel Demo</title></head>
+<body>
+<h2 class="carousel_header">Featured Item</h2>
+<img id="prevBtn" src="prevbtn.png" /><img id="nextBtn" src="nextbtn.png" />
+<div id="carouselContainer">
+	<div id="carouselInner" style="vertical-align: top;"><div class='bc_carousel' id="carousel_1"><img src="book1.jpeg" /><div class="carousel_title">C++ For Dummies</div></div><div class='bc_carousel' id="carousel_2"><img src="book2.jpeg" /></div><div class='bc_carousel' id="carousel_3"><img src="book3.jpeg" /><div class="carousel_title">A really great read, testing long text, and some more.</div></div><div class='bc_carousel' id="carousel_4"><img src="book4.jpeg" /></div><div class='bc_carousel' id="carousel_5"><img src="book5.jpeg" /><div class="carousel_title">C++ Programming</div></div>
+	</div>
+</div>
+</body>
+</html>
